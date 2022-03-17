@@ -1,0 +1,26 @@
+---
+- name: Apache server uninstalled
+  hosts: web
+
+  tasks:
+  - name: firewalld disabled and stopped
+    service:
+      name: firewalld
+      enabled: false
+      state: stopped
+
+  - name: Apache enabled and stopped
+    service:
+      name: httpd
+      enabled: false
+      state: stopped
+      
+  - name: remove Apache 
+    yum:
+      name: httpd
+      state: absent
+
+  - name: remove firewalld
+    yum:
+      name: firewalld
+      state: absent
